@@ -20,7 +20,9 @@ async function run() {
         const database = client.db("volunteer-service");
         const volunteerCollection = database.collection("volunteers");
         app.get('/services', async(req, res) => {
-            res.send('server run success')
+            const query = {};
+            const result = await volunteerCollection.find(query).toArray();
+            res.json(result);
         })
     } finally {
 
@@ -28,9 +30,9 @@ async function run() {
 }
 run().catch(console.dir)
 
-app.get('/', (req, res) => {
-    res.send('this is home page')
-})
+// app.get('/', (req, res) => {
+//     res.send('this is home page')
+// })
 
 app.listen(port, () => {
     console.log('server running on port ' + port);
