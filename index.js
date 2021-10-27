@@ -19,6 +19,7 @@ async function run() {
         await client.connect();
         const database = client.db("volunteer-service");
         const volunteerCollection = database.collection("volunteers");
+        const categoryCollection = database.collection("addedCategory");
         app.get('/services', async(req, res) => {
             const query = {};
             const result = await volunteerCollection.find(query).toArray();
@@ -31,6 +32,13 @@ async function run() {
             const result = await volunteerCollection.findOne(query)
             res.send(result)
         })
+
+        app.post('/added', async(req, res) => {
+            const category = req.body;
+            const result = await categoryCollection.insertOne(category)
+            res.send(result)
+        })
+
     } finally {
 
     }
