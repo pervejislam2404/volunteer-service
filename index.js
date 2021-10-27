@@ -41,7 +41,7 @@ async function run() {
 
         app.get('/added/:email', async(req, res) => {
             const email = req.params.email;
-            const query = { email: { email: email } }
+            const query = { email: email };
             const result = await categoryCollection.find(query).toArray()
             res.json(result);
         })
