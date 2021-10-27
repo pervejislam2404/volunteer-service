@@ -55,6 +55,12 @@ async function run() {
             res.send(result);
         })
 
+        app.get('/allAdded', async(req, res) => {
+            const query = {};
+            const result = await categoryCollection.find(query).toArray();
+            res.json(result);
+        })
+
     } finally {
 
     }
