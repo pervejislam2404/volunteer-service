@@ -39,6 +39,13 @@ async function run() {
             res.send(result)
         })
 
+        app.get('/added/:email', async(req, res) => {
+            const email = req.params.email;
+            const query = { email: { email: email } }
+            const result = await categoryCollection.find(query).toArray()
+            res.json(result);
+        })
+
     } finally {
 
     }
