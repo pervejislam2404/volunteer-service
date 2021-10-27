@@ -24,6 +24,13 @@ async function run() {
             const result = await volunteerCollection.find(query).toArray();
             res.json(result);
         })
+
+        app.get('/service/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await volunteerCollection.findOne(query)
+            res.send(result)
+        })
     } finally {
 
     }
