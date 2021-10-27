@@ -20,6 +20,8 @@ async function run() {
         const database = client.db("volunteer-service");
         const volunteerCollection = database.collection("volunteers");
         const categoryCollection = database.collection("addedCategory");
+
+
         app.get('/services', async(req, res) => {
             const query = {};
             const result = await volunteerCollection.find(query).toArray();
@@ -44,6 +46,13 @@ async function run() {
             const query = { email: email };
             const result = await categoryCollection.find(query).toArray()
             res.json(result);
+        })
+
+        app.delete('/delete/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await categoryCollection.deleteOne(query);
+            res.send(result);
         })
 
     } finally {
